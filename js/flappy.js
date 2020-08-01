@@ -168,7 +168,7 @@ function RandomBackgroundColor(element) {
             _element.style.backgroundColor = elementBackgroundColor
         }
         else {
-            elementBackgroundColor = retrieveRgbCharAt(elementBackgroundColor)
+            elementBackgroundColor = retrieveRgbChar(elementBackgroundColor)
             backgroundColorRgb = fromArrStringToArrNumber(elementBackgroundColor)
             backgroundColorRgb = increaseRgbNumber(backgroundColorRgb)
             _element.style.backgroundColor = backgroundColorRgb
@@ -220,15 +220,16 @@ function fromArrStringToArrNumber(stringArr = []) {
     return arrRgbNumbers
 }
 
-function retrieveRgbCharAt(text = '') {
+function retrieveRgbChar(text = '') {
     const isNumber = n => !isNaN(n)
     let rgbChar = ''
     let rgbCharArr = []
-    for (let i = 0; i < text.length; i++) {
-        if (isNumber(text.charAt(i))) {
-            rgbChar += text.charAt(i)
+
+    for(let char of text) {
+        if (isNumber(char)) {
+            rgbChar += char
         }
-        if (text.charAt(i) == ',' || text.charAt(i) == ')') {
+        if (char == ',' || char == ')') {
             rgbChar = rgbChar.trim()
             rgbCharArr.push(rgbChar)
             rgbChar = ''
@@ -251,7 +252,6 @@ function FlappyBird() {
     const barreiras = new Barreiras(altura, largura, 200, 400, () => progresso.atualizarPontos(++pontos))
     const passaro = new Passaro(altura)
     const randomBackgroundColor = new RandomBackgroundColor(areaDoJogo)
-    let time = 1
 
     areaDoJogo.appendChild(progresso.elemento)
     areaDoJogo.appendChild(passaro.elemento)
@@ -261,24 +261,18 @@ function FlappyBird() {
 
     //inicio o jogo
     this.start = () => {
-
         //loop do jogo
         const temporizador = setInterval(() => {
-            //barreiras.animar()
+            barreiras.animar()
             passaro.animar()
             randomBackgroundColor.setBackgroundColor()
             if (colidiu(passaro, barreiras)) {
                 clearInterval(temporizador)
             }
         }, 20)
-
-        const temp = setInterval(() => {
-            randomBackgroundColor.setBackgroundColor()
-        }, 1)
-
     }
 
 }
 
-new FlappyBird().start()
+const a = new FlappyBird().start()
 

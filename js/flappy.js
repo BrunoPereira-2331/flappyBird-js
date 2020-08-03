@@ -15,10 +15,6 @@ function Barreira(reversa = false) {
     this.setAltura = altura => corpo.style.height = `${altura}px`
 }
 
-/* const b = new Barreira(true)
-b.setAltura(200)
-document.querySelector('[wm-flappy]').appendChild(b.elemento) */
-
 function ParDeBarreiras(altura, abertura, x) {
     //this transforma o atributo fora da function
     this.elemento = novoElemento('div', 'par-de-barreiras')
@@ -44,9 +40,6 @@ function ParDeBarreiras(altura, abertura, x) {
     this.sortearAbertura()
     this.setX(x)
 }
-
-/* const b = new ParDeBarreiras(700, 200, 400)
-document.querySelector('[wm-flappy]').appendChild(b.elemento) */
 
 function Barreiras(altura, largura, abertura, espaco, notificarPonto) {
     this.pares = [
@@ -104,19 +97,6 @@ function Passaro(alturaJogo) {
     this.setY(alturaJogo / 2)
 }
 
-/* const barreiras = new Barreiras(700, 1200, 200, 400)
-
-const passaro = new Passaro(700)
-const areaDoJogo = document.querySelector(['[wm-flappy]'])
-
-areaDoJogo.appendChild(passaro.elemento)
-barreiras.pares.forEach(par => areaDoJogo.appendChild(par.elemento))
-setInterval(() => {
-    barreiras.animar()
-    passaro.animar()
-}, 20)
- */
-
 function Progresso() {
     this.elemento = novoElemento('span', 'progresso')
     this.atualizarPontos = pontos => {
@@ -163,7 +143,6 @@ function RandomBackgroundColor(element) {
         let elementBackgroundColor = ''
         elementBackgroundColor = element.style.backgroundColor
         if (!(elementBackgroundColor.includes('rgb', 0))) {
-            //elementBackgroundColor = "rgb(0, 0, 1)"
             elementBackgroundColor = "rgb(1, 1, 1)"
             _element.style.backgroundColor = elementBackgroundColor
         }
@@ -259,7 +238,6 @@ function FlappyBird() {
     //para cada par adiciona dentro da area do jogo
     barreiras.pares.forEach(par => areaDoJogo.appendChild(par.elemento))
 
-    //inicio o jogo
     this.start = () => {
         //loop do jogo
         const temporizador = setInterval(() => {
@@ -274,5 +252,4 @@ function FlappyBird() {
 
 }
 
-const a = new FlappyBird().start()
-
+new FlappyBird().start()
